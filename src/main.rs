@@ -111,8 +111,8 @@ pub mod bradley_terry {
                         .filter(|&j| j != i)
                         .map(|j| {
                             self.pairwise_matrix[[i, j]]
-                                - (self.pairwise_matrix[[i, j]] + self.pairwise_matrix[[j, i]])
-                                    * probs[[i, j]]
+                                - ((self.pairwise_matrix[[i, j]] + self.pairwise_matrix[[j, i]])
+                                    * probs[[i, j]])
                         })
                         .sum::<f64>();
             }
@@ -138,7 +138,7 @@ pub mod bradley_terry {
                                 .sum::<f64>();
                     } else {
                         hess[[i - 1, j - 1]] = self.scaling_factor.powi(2)
-                            * self.pairwise_matrix[[i, j]]
+                            * ( self.pairwise_matrix[[i, j]] + self.pairwise_matrix[[j,i]] )
                             * probs[[i, j]]
                             * (1.0 - probs[[i, j]]);
                     }
